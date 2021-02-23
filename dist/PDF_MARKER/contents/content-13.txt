@@ -1,0 +1,165 @@
+《HBase原理与实践》  0
+前言
+第1章HBase概述
+1.1HBase 前生今世
+1.2HBase数据模型
+1.2.1逻辑视图
+1.2.2多维稀疏排序Map
+1.2.3物理视图
+1.2.4行式存储、列式存储、列簇式存储
+1.3HBase体系结构
+1.4 HBase系统特性
+第2章基础数据结构与算法
+2.1 跳跃表
+2.2 LSM树
+2.3 布隆过滤器
+2.4 设计KV存储引擎Minibase
+2.5拓展阅读
+第3章HBase依赖服务
+3.1ZooKeeper简介
+3.2HDFS简介
+3.4拓展阅读
+第4章HBase客户端
+4.1 HBase客户端实现
+4.1.1 定位Meta表
+4.1.2 Scan的复杂之处
+4.2 HBase客户端避坑指南
+第5章RegionServer的核心模块
+5.1 RegionServer内部结构
+5.2 HLog
+5.2.1 HLog文件结构
+5.2.2 HLog文件存储
+5.2.3 HLog生命周期
+5.3 MemStore
+5.3.1 MemStore内部结构
+5.3.2 MemStore的GC问题
+5.3.3 MSLAB内存管理方式
+5.3.4 MemStore Chunk Pool
+5.3.5 MSLAB相关配置
+5.4 HFile
+5.4.1 HFile逻辑结构
+5.4.2 HFile物理结构
+5.4.3 HFile的基础Block
+5.4.4 HFile中布隆过滤器相关的Block
+5.4.5 HFile中索引相关的Block
+5.4.6HFile文件查看工具
+5.5 BlockCache
+5.5.1.LRUBlockCache
+5.5.2.SlabCache
+5.5.3.BucketCache
+5.5.4.不同BlockCache方案性能对比
+5.6拓展阅读
+第6章HBase读写流程
+6.1 HBase写入流程
+6.1.1写入流程的三个阶段
+6.1.2 Region写入流程
+6.1.3 MemStore Flush
+6.2 BulkLoad功能
+6.2.1 BulkLoad核心流程
+6.2.2 BulkLoad基础案例
+6.3 HBase读取流程
+6.3.1 Client-Server读取交互逻辑
+6.3.2 Server端Scan框架体系
+6.3.3过滤淘汰不符合查询条件的HFile
+6.3.4HFile中读取待查找Key
+思考与练习
+6.4深入理解Coprocessor
+6.4.1 Coprocessor分类
+6.4.2 Coprocessor加载
+第7章 Compaction实现
+7.1 Compaction基本工作原理
+7.1.1 Compaction基本流程
+7.1.2 Compaction触发时机
+7.1.3 待合并HFile集合选择策略
+7.1.4 挑选合适的线程池
+7.1.5 HFile文件合并执行
+思考与练习
+7.1.6Compaction相关注意事项
+7.2 Compaction高级策略
+第8章负载均衡实现
+8.1 Region迁移
+8.2 Region合并
+8.3 Region分裂
+8.4 HBase的负载均衡应用
+8.5拓展阅读
+第9章宕机恢复原理
+9.1 HBase常见故障分析
+9.2 HBase故障恢复基本原理
+9.3 HBase故障恢复流程
+
+第10章复制
+10.1 复制场景及原理
+10.1.1管理流程的设计和问题
+10.1.2复制原理
+10.2 串行复制
+10.2.1非串行复制导致的问题
+10.2.2串行复制的设计思路
+思考与练习
+10.3 同步复制
+10.3.1设计思路
+10.3.2同步复制和异步复制对比
+10.4拓展阅读
+第11章备份与恢复
+11.1 Snapshot概述
+11.2 Snapshot创建
+11.2.1 Snapshot技术基础原理
+11.2.2 在线Snapshot的分布式架构——两阶段提交
+11.2.3 Snapshot核心实现
+11.3 Snapshot恢复
+11.4 Snapshot进阶
+11.5拓展阅读
+第12章HBase运维
+12.1 HBase系统监控
+12.1.1 HBase监控指标输出方式
+12.1.2 HBase核心监控指标
+12.1.3 HBase表级监控
+12.2 HBase集群基准性能测试
+12.3 HBase YCSB
+12.4 HBase业务隔离
+12.5 HBase Shell
+12.6 HBase HBCK
+12.8 HBase核心参数配置
+12.8 HBase系统相关日志
+12.9 HBase表设计
+第13章HBase系统调优
+13.1 HBase GC调优
+13.2 G1 GC性能调优
+13.2.1 CMS和G1 GC的本质区别
+13.2.2 测试环境
+13.2.3 G1 GC核心参数
+13.2.4 初始参数效果
+13.3 HBase操作系统调优
+13.4 HBase-HDFS调优策略
+13.5 HBase读取性能优化
+13.5.1HBase服务器端优化
+13.5.2 HBase客户端优化
+13.5.3 HBase列簇设计优化
+13.6 HBase写入性能调优
+13.6.1 HBase服务器端优化
+13.6.2 HBase客户端优化
+第14章HBase运维案例分析
+14.1 RegionServer宕机
+案例一：长时间GC导致RegionServer宕机
+案例二：系统严重Bug导致RegionServer宕机
+14.2 HBase写入异常
+案例一：MemStore占用内存大小超过设定阈值导致写入阻塞
+案例二：RegionServer Active Handler资源被耗尽导致写入阻塞
+案例三：HDFS缩容导致部分写入异常
+14.3总结: HBase运维时问题分析思路
+第15章 HBase2.x核心技术
+15.1 Procedure功能
+15.2 In Memory Compaction
+15.3 MOB对象存储
+15.4 Offheap读路径和Offheap写路径
+15.5异步化设计
+第16章高级话题
+16.1 二级索引
+16.2 单行事务和跨行事务
+16.3 HBase开发与测试
+16.3.1 HBase社区运作机制
+16.3.2项目测试
+16.3.3拓展阅读
+附录A  HBase热门问题集锦
+
+
+

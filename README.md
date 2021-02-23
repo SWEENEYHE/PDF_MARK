@@ -1,3 +1,4 @@
+### 直接使用党：dist下的PDF_MARKER文件夹是可以直接使用的.exe源，注意需要整个文件夹一起下载
 ### 使用pychrome开发，所有工具方法/类都作为第三方包导入，因此修改源文件无效，需要修改site-packages中的代码
 
 ### 打包命令,使用第三方模块必须指定路径(windows下生成exe需要安装pyinstaller)
